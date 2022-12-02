@@ -21,13 +21,15 @@ public class FileService {
 
 	private Path foundFile;
 	
-	@Value("${file.upload-dir}")
-	private Resource resource;
+//	@Value("${file.upload-dir}")
+//	private Resource resource;
+
+	private Path path = Paths.get("src/main/resources/assets");
 	
 	public String saveFile(String fileName, MultipartFile multipartFile) throws IOException, URISyntaxException {
 		try {
 			
-			Path path = Paths.get(resource.getURI().toString() + "assets");
+			//Path path = Paths.get(resource.getURI().toString() + "assets");
 			System.out.println(path);
 			if (!Files.exists(path)) {
 				init(path);
@@ -55,8 +57,8 @@ public class FileService {
 		  }
 
 	public Resource getFileAsResource(String filename) throws IOException {
-		URI uri = resource.getURI();
-		Path path = Paths.get(uri);
+		//URI uri = resource.getURI();
+		//Path path = Paths.get(uri);
 		Files.list(path).forEach(file -> {
 			if (file.getFileName().toString().startsWith(filename)) {
 				foundFile = file;
@@ -70,8 +72,8 @@ public class FileService {
 	}
 	
     public byte[] downloadImageFromSystem(String fileName) throws IOException{  
-    	URI uri = resource.getURI();
-		Path path = Paths.get(uri);
+    	//URI uri = resource.getURI();
+		//Path path = Paths.get(uri);
 		String filePath = (path + "\\" + fileName);
     	byte[] image = Files.readAllBytes(new File(filePath).toPath());    	
     	return image;
